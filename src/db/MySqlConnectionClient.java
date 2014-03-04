@@ -201,13 +201,20 @@ public class MySqlConnectionClient {
         return excuteUpdate(strQuery );
     }
     
+    /*
+     * drop a table from database
+     * @tableName : Name of table need to drop
+     */
     public int dropTable( String tableName ) {
         String strQuery =   String.format( "DROP TABLE \'s\'", tableName );
         
         return excuteUpdate(strQuery );
     }
     
-    
+    /*
+     * select all info of table
+     * @fromTable : table need to get info
+     */
     public ResultSet selectAll( String fromTable ) {
         
         String querryStr=   String.format( "SELECT * FROM %s", fromTable );
@@ -215,6 +222,11 @@ public class MySqlConnectionClient {
         return excuteQuery( querryStr );
     }
     
+    /*
+     * select infos of table
+     * @params : list info want to get
+     * @fromTable : table need to get info
+     */
     public ResultSet selectCmd( String params, String fromTable ) {
         
         String querryStr=   String.format( "SELECT %s FROM %s", params, fromTable );
@@ -222,6 +234,12 @@ public class MySqlConnectionClient {
         return excuteQuery( querryStr );
     }
     
+    /*
+     * select infos of table with condition
+     * @params : list info want to get
+     * @fromTable : table need to get info
+     * @where : a condition
+     */
     public ResultSet selectCmdWhere( String params, String fromTable, String where ) {
         
         String querryStr=   String.format( "SELECT %s FROM %s WHERE %s", params, fromTable, where );
@@ -229,6 +247,13 @@ public class MySqlConnectionClient {
         return excuteQuery( querryStr );
     }
     
+    /*
+     * select infos of table with condition
+     * @params : list info want to get
+     * @fromTable : table need to get info
+     * @where : a condition
+     * @ex : extension command
+     */
     public ResultSet selectCmdWhereEx( String params, String fromTable, String where, String ex ) {
         
         String querryStr=   String.format( "SELECT %s FROM %s WHERE %s %s", params, fromTable, where, ex );
@@ -236,6 +261,11 @@ public class MySqlConnectionClient {
         return excuteQuery( querryStr );
     }
     
+    /*
+     * insert new record to table
+     * @toTable : table inserted
+     * @values : record
+     */
     public int insertTable( String toTable, String values ) {
         
         String strInsert    =   String.format( "INSERT INTO %s VALUES (%s)", toTable, values );
@@ -243,6 +273,12 @@ public class MySqlConnectionClient {
         return excuteUpdate( strInsert );
     }
     
+    /*
+     * insert new record to table
+     * @toTable : table inserted
+     * @params : list of columns
+     * @values : record
+     */
     public int insertTable( String toTable, String params, String values ) {
         
         String strInsert    =   String.format( "INSERT INTO %s (%s) VALUES (%s)", toTable, params, values );
@@ -250,36 +286,69 @@ public class MySqlConnectionClient {
         return excuteUpdate( strInsert );
     }
     
+    /*
+     * update record in table
+     * @table : table inserted
+     * @content : info updated
+     * @where : condition update
+     */
     public int updateTable( String table, String content, String where ) {
         
         String strQuery =   String.format( "UPDATE %s SET %s WHERE %s", table, content, where );
         return excuteUpdate( strQuery );
     }
     
+    /*
+     * delete all record from table
+     * @table : table droped
+     */
     public int deleteAll( String table ) {
         
         String strQuery =   String.format( "DELETE FROM %s", table );
         return excuteUpdate( strQuery );
     }
     
+    /*
+     * delete all record from table with condition
+     * @table : table droped
+     * @where : condition
+     */
     public int deleteAllWhere( String table, String where ) {
         
         String strQuery =   String.format( "DELETE FROM %s WHERE %s", table, where );
         return excuteUpdate( strQuery );
     }
     
+    /*
+     * add new column to table
+     * @table : table
+     * @columName : column add
+     * @type : type of column
+     */
     public int addColumn( String table, String columName, String type ) {
         
         String strQuery =   String.format( "ALTER TABLE %s ADD COLUMN %s %s", table, columName, type );
         return excuteUpdate( strQuery );
     }
     
+    /*
+     * delete column from table
+     * @table : table
+     * @columName : column deleted
+     */
     public int deleteColumn( String table, String columName ) {
         
         String strQuery =   String.format( "ALTER TABLE %s DROP COLUMN %s", table, columName );
         return excuteUpdate( strQuery );
     }
     
+    /*
+     * change name of column
+     * @table : table
+     * @oldName : a old name of column want to change
+     * @newName : a new name of column want to change
+     * @type : type of column
+     */
     public int changeColumnName( String table, String oldName, String newName, String type ) {
         
         String strQuery =   String.format( "ALTER TABLE %s CHANGE %s %s %s", table, oldName, newName, type );
